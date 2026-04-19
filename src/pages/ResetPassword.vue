@@ -141,9 +141,11 @@ input:focus { border-color: #4f7cff; }
 .check-icon { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: #48bb78; color: white; border-radius: 50%; font-size: 20px; font-weight: bold; margin-bottom: 10px; }
 .success-message p { color: #2f855a; font-weight: 500; margin-bottom: 20px; }
 .back-btn { display: inline-block; padding: 10px 20px; background: #4f7cff; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; }
+/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
 @media (max-width: 768px) {
-  .login-page { /* Если класс называется по-другому, например .forgot-page, измени имя здесь */
+  .auth-page { /* ИСПРАВЛЕНО: было .login-page */
     flex-direction: column;
+    min-height: auto;
   }
 
   .left-side {
@@ -155,7 +157,8 @@ input:focus { border-color: #4f7cff; }
 
   .branding {
     position: static;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     text-align: center;
   }
 
@@ -166,9 +169,10 @@ input:focus { border-color: #4f7cff; }
 
   .right-side {
     padding: 10px;
+    align-items: flex-start; /* Чтобы форма не улетала слишком низко */
   }
 
-  .login-card { /* Или .forgot-card */
+  .login-card {
     box-shadow: none;
     padding: 20px;
   }
