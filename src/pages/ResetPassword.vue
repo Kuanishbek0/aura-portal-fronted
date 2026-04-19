@@ -141,5 +141,36 @@ input:focus { border-color: #4f7cff; }
 .check-icon { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: #48bb78; color: white; border-radius: 50%; font-size: 20px; font-weight: bold; margin-bottom: 10px; }
 .success-message p { color: #2f855a; font-weight: 500; margin-bottom: 20px; }
 .back-btn { display: inline-block; padding: 10px 20px; background: #4f7cff; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; }
-@media (max-width: 768px) { .left-side { display: none; } .login-card { box-shadow: none; padding: 20px; } }
+@media (max-width: 768px) {
+  .login-page { /* Если класс называется по-другому, например .forgot-page, измени имя здесь */
+    flex-direction: column;
+  }
+
+  .left-side {
+    flex: none;
+    display: flex;
+    padding: 20px;
+    background-color: white;
+  }
+
+  .branding {
+    position: static;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .illustration {
+    max-width: 150px;
+    margin: 0 auto;
+  }
+
+  .right-side {
+    padding: 10px;
+  }
+
+  .login-card { /* Или .forgot-card */
+    box-shadow: none;
+    padding: 20px;
+  }
+}
 </style>
