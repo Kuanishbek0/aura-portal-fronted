@@ -306,14 +306,32 @@ input:focus {
   margin-left: 5px;
 }
 
-/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
 @media (max-width: 768px) {
-  .left-side {
-    display: none;
+  /* Вместо того чтобы прятать, меняем порядок */
+  .login-page {
+    flex-direction: column; /* Ставим блоки друг под друга */
   }
-  .right-side {
+
+  .left-side {
+    flex: none;
+    display: flex; /* Показываем обратно */
+    padding: 20px;
     background-color: white;
   }
+
+  .branding {
+    position: static; /* Убираем абсолютное позиционирование */
+    margin-bottom: 20px;
+  }
+
+  .illustration {
+    max-width: 150px; /* Уменьшаем картинку для телефона */
+  }
+
+  .right-side {
+    padding: 10px;
+  }
+
   .login-card {
     box-shadow: none;
     padding: 20px;
