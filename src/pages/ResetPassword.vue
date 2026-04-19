@@ -182,39 +182,50 @@ input:focus { border-color: #4f7cff; }
 .back-btn { display: inline-block; padding: 10px 20px; background: #4f7cff; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; }
 
 /* === АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ === */
+/* === ФИНАЛЬНАЯ АДАПТИВНОСТЬ === */
 @media (max-width: 768px) {
-  .auth-page {
-    flex-direction: column;
-    min-height: 100vh;
+  /* Форсируем отображение контейнера как колонки */
+  .auth-page, .login-page { 
+    flex-direction: column !important; 
+    display: flex !important;
   }
 
+  /* Заставляем левую сторону ПОКАЗАТЬСЯ */
   .left-side {
-    flex: none;
-    width: 100%; /* Чтобы блок растянулся на весь экран телефона */
-    display: flex;
-    padding: 40px 20px;
-    background-color: #f8fafc;
+    display: flex !important; /* Убирает display: none, если он где-то застрял */
+    flex: none !important;
+    width: 100% !important;
+    padding: 20px !important;
+    background-color: #f8fafc !important;
+    min-height: 250px !important; /* Даем минимальную высоту, чтобы не схлопывалось */
   }
 
+  /* Выравниваем логотип и картинку по центру */
   .branding {
-    position: static; /* Вытаскиваем заголовок из угла */
-    margin-bottom: 20px;
+    position: static !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
   }
 
   .illustration {
-    max-width: 180px; /* Увеличил, чтобы на мобилке было лучше видно */
-    margin: 0 auto;
+    display: block !important;
+    max-width: 160px !important;
+    height: auto !important;
+    margin: 0 auto !important;
   }
 
+  /* Настраиваем правую сторону, чтобы не наползала */
   .right-side {
-    padding: 20px;
-    flex: none;
+    flex: 1 !important;
+    padding: 10px !important;
+    background-color: white !important;
   }
 
   .login-card {
-    box-shadow: none;
-    padding: 20px;
-    border: none;
+    box-shadow: none !important;
+    padding: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 </style>

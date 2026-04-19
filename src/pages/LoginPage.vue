@@ -306,35 +306,50 @@ input:focus {
   margin-left: 5px;
 }
 
+/* === ФИНАЛЬНАЯ АДАПТИВНОСТЬ === */
 @media (max-width: 768px) {
-  /* Вместо того чтобы прятать, меняем порядок */
-  .login-page {
-    flex-direction: column; /* Ставим блоки друг под друга */
+  /* Форсируем отображение контейнера как колонки */
+  .auth-page, .login-page { 
+    flex-direction: column !important; 
+    display: flex !important;
   }
 
+  /* Заставляем левую сторону ПОКАЗАТЬСЯ */
   .left-side {
-    flex: none;
-    display: flex; /* Показываем обратно */
-    padding: 20px;
-    background-color: white;
+    display: flex !important; /* Убирает display: none, если он где-то застрял */
+    flex: none !important;
+    width: 100% !important;
+    padding: 20px !important;
+    background-color: #f8fafc !important;
+    min-height: 250px !important; /* Даем минимальную высоту, чтобы не схлопывалось */
   }
 
+  /* Выравниваем логотип и картинку по центру */
   .branding {
-    position: static; /* Убираем абсолютное позиционирование */
-    margin-bottom: 20px;
+    position: static !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
   }
 
   .illustration {
-    max-width: 150px; /* Уменьшаем картинку для телефона */
+    display: block !important;
+    max-width: 160px !important;
+    height: auto !important;
+    margin: 0 auto !important;
   }
 
+  /* Настраиваем правую сторону, чтобы не наползала */
   .right-side {
-    padding: 10px;
+    flex: 1 !important;
+    padding: 10px !important;
+    background-color: white !important;
   }
 
   .login-card {
-    box-shadow: none;
-    padding: 20px;
+    box-shadow: none !important;
+    padding: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 </style>
