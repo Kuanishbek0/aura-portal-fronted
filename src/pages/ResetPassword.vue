@@ -117,64 +117,104 @@ const handleReset = async () => {
 </script>
 
 <style scoped>
-/* Стили те же самые, что и выше */
-.auth-page { display: flex; min-height: 100vh; font-family: 'Inter', sans-serif; }
-.left-side { flex: 0 0 35%; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; position: relative; }
+/* ОБЩИЙ КОНТЕЙНЕР */
+.auth-page { 
+  display: flex; 
+  min-height: 100vh; 
+  font-family: 'Inter', sans-serif; 
+}
+
+/* ЛЕВАЯ ЧАСТЬ */
+.left-side { 
+  flex: 0 0 35%; 
+  background-color: #f8fafc; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 40px; 
+  position: relative; 
+}
+
 .branding { position: absolute; top: 40px; left: 40px; }
 .logo { font-size: 24px; font-weight: 800; color: #1f2937; margin: 0; }
 .illustration { max-width: 65%; height: auto; object-fit: contain; }
-.right-side { flex: 1; background-color: #ffffff; display: flex; justify-content: center; align-items: center; padding: 20px; }
-.login-card { background: white; width: 100%; max-width: 420px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); }
+
+/* ПРАВАЯ ЧАСТЬ */
+.right-side { 
+  flex: 1; 
+  background-color: #ffffff; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+}
+
+.login-card { 
+  background: white; 
+  width: 100%; 
+  max-width: 420px; 
+  padding: 40px; 
+  border-radius: 16px; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
+}
+
 .uni-logo { display: flex; justify-content: center; margin-bottom: 15px; }
 .logo-circle { width: 60px; height: 60px; background: #f8fafc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 2px solid #e2e8f0; }
 .title { font-size: 22px; font-weight: 600; color: #1f2937; text-align: center; margin-bottom: 24px; }
+
+/* ФОРМА */
 .input-group { margin-bottom: 20px; }
 label { display: block; font-size: 13px; font-weight: 500; color: #6b7280; margin-bottom: 6px; }
 input { width: 100%; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; outline: none; box-sizing: border-box; }
 input:focus { border-color: #4f7cff; }
+
 .submit-btn { width: 100%; padding: 14px; background-color: #4f7cff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
 .submit-btn:hover { background-color: #3b66f5; }
 .submit-btn:disabled { background-color: #9ca3af; }
+
+/* СООБЩЕНИЯ */
 .error-text { color: #e11d48; font-size: 12px; margin-top: 5px; font-weight: 500; }
 .error-message { background: #fff1f2; color: #e11d48; padding: 15px; border-radius: 8px; text-align: center; font-weight: 500; }
 .success-message { text-align: center; background: #f0fff4; padding: 30px 20px; border-radius: 12px; border: 1px solid #c6f6d5; }
 .check-icon { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: #48bb78; color: white; border-radius: 50%; font-size: 20px; font-weight: bold; margin-bottom: 10px; }
 .success-message p { color: #2f855a; font-weight: 500; margin-bottom: 20px; }
 .back-btn { display: inline-block; padding: 10px 20px; background: #4f7cff; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; }
-/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
+
+/* === АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ === */
 @media (max-width: 768px) {
-  .auth-page { /* ИСПРАВЛЕНО: было .login-page */
+  .auth-page {
     flex-direction: column;
-    min-height: auto;
+    min-height: 100vh;
   }
 
   .left-side {
     flex: none;
+    width: 100%; /* Чтобы блок растянулся на весь экран телефона */
     display: flex;
-    padding: 20px;
-    background-color: white;
+    padding: 40px 20px;
+    background-color: #f8fafc;
   }
 
   .branding {
-    position: static;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: center;
+    position: static; /* Вытаскиваем заголовок из угла */
+    margin-bottom: 20px;
   }
 
   .illustration {
-    max-width: 150px;
+    max-width: 180px; /* Увеличил, чтобы на мобилке было лучше видно */
     margin: 0 auto;
   }
 
   .right-side {
-    padding: 10px;
-    align-items: flex-start; /* Чтобы форма не улетала слишком низко */
+    padding: 20px;
+    flex: none;
   }
 
   .login-card {
     box-shadow: none;
     padding: 20px;
+    border: none;
   }
 }
 </style>
