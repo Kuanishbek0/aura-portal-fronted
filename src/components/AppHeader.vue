@@ -17,6 +17,10 @@
         </div>
 
         <div class="icon-group">
+          <button class="icon-btn theme-toggle" @click="toggleTheme" :title="isDark ? 'Светлая тема' : 'Темная тема'">
+            {{ isDark ? '☀️' : '🌙' }}
+          </button>
+
           <button class="icon-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 100 8 4 4 0 000-8zM6 22v-4a4 4 0 014-4h4a4 4 0 014 4v4"/></svg>
           </button>
@@ -47,12 +51,22 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '@/services/api'
-import { useLang } from '@/composables/useLang' // Подключаем наш глобальный язык
+import { useLang } from '@/composables/useLang' 
 
 const router = useRouter()
 const user = ref(null)
 const currentTime = ref('')
-const { lang } = useLang() // Достаем переменную lang
+const { lang } = useLang() 
+
+// === ЛОГИКА ТЕМЫ ===
+const isDark = ref(false)
+
+const toggleTheme = () => {
+  isDark.value = !isDark.value
+  const theme = isDark.value ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', theme)
+  localStorage.setItem('theme', theme)
+}
 
 const updateTime = () => {
   const now = new Date()
@@ -61,8 +75,16 @@ const updateTime = () => {
 
 let timer
 onMounted(async () => {
+  // Запускаем время
   updateTime()
   timer = setInterval(updateTime, 1000)
+
+  // Инициализация темы при загрузке
+  const savedTheme = localStorage.getItem('theme') || 'light'
+  isDark.value = savedTheme === 'dark'
+  document.documentElement.setAttribute('data-theme', savedTheme)
+
+  // Загрузка профиля
   try {
     const res = await api.get('/auth/me')
     user.value = res.data
@@ -73,32 +95,34 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>
-.header { height: 60px; /* Было 72px, стало 60px */ background: white; color: #1f2937; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+/* Обрати внимание: я заменил background: white на var(--card-bg) */
+.header { height: 60px; background: var(--card-bg, #ffffff); color: var(--text-primary, #1f2937); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.3s, color 0.3s; }
 .header-left, .header-right { display: flex; align-items: center; }
-.header-right { gap: 20px; /* Было 24px */ }
-.title { font-size: 16px; /* Было 18px */ font-weight: 700; color: #1f2937; margin-left: 10px; }
-.menu-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #4b5563; }
+.header-right { gap: 20px; }
+.title { font-size: 16px; font-weight: 700; color: var(--text-primary, #1f2937); margin-left: 10px; }
+.menu-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-secondary, #4b5563); }
 
 /* ЯЗЫК И ИКОНКИ */
 .header-actions { display: flex; align-items: center; gap: 16px; }
-.lang-switcher { display: flex; gap: 6px; font-size: 14px; /* Чуть меньше */ font-weight: 500; color: #64748b; }
+.lang-switcher { display: flex; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text-secondary, #64748b); }
 .lang-switcher span { cursor: pointer; transition: color 0.2s; }
-.lang-switcher span:hover, .lang-switcher span.active { color: #dc2626; }
-.divider { color: #cbd5e1; cursor: default; }
+.lang-switcher span:hover, .lang-switcher span.active { color: var(--accent-color, #dc2626); }
+.divider { color: var(--border-color, #cbd5e1); cursor: default; }
 
 .icon-group { display: flex; gap: 14px; align-items: center; }
-.icon-btn { background: none; border: none; width: 20px; /* Было 24px */ height: 20px; color: #64748b; cursor: pointer; position: relative; padding: 0; transition: color 0.2s; }
-.icon-btn:hover { color: #1f2937; }
+.icon-btn { background: none; border: none; width: 20px; height: 20px; color: var(--text-secondary, #64748b); cursor: pointer; position: relative; padding: 0; transition: color 0.2s; }
+.icon-btn:hover { color: var(--text-primary, #1f2937); }
+.theme-toggle { font-size: 16px; display: flex; justify-content: center; align-items: center; }
 .notification { position: relative; }
-.badge { position: absolute; top: -6px; right: -8px; background: #dc2626; color: white; font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 10px; border: 2px solid white; }
+.badge { position: absolute; top: -6px; right: -8px; background: #dc2626; color: white; font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 10px; border: 2px solid var(--card-bg, white); }
 
 /* ЧАСЫ И ПРОФИЛЬ */
-.header-clock { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 10px; border-radius: 8px; }
+.header-clock { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-secondary, #475569); background: var(--bg-color, #f1f5f9); padding: 4px 10px; border-radius: 8px; }
 .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 4px; border-radius: 16px; }
 .user-info { display: flex; flex-direction: column; text-align: right; }
 .name { font-size: 13px; font-weight: 600; }
-.group { font-size: 11px; color: #9ca3af; }
-.avatar-circle { width: 32px; /* Было 36px */ height: 32px; background: #4f7cff; color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+.group { font-size: 11px; color: var(--text-secondary, #9ca3af); }
+.avatar-circle { width: 32px; height: 32px; background: var(--accent-color, #4f7cff); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
 
 @media (max-width: 768px) {
   .header-actions, .header-clock { display: none; }
