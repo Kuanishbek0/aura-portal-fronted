@@ -133,12 +133,13 @@ const handleLogin = async () => {
   display: flex;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color); /* Используем переменную */
 }
 
 /* ЛЕВАЯ ЧАСТЬ */
 .left-side {
   flex: 0 0 35%;
-  background-color: #f8fafc;
+  background-color: var(--bg-color); /* Используем переменную */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -156,7 +157,7 @@ const handleLogin = async () => {
 .logo {
   font-size: 24px;
   font-weight: 800;
-  color: #1f2937;
+  color: var(--text-primary); /* Используем переменную */
   margin: 0;
 }
 
@@ -169,7 +170,7 @@ const handleLogin = async () => {
 /* ПРАВАЯ ЧАСТЬ */
 .right-side {
   flex: 1;
-  background-color: #ffffff; 
+  background-color: var(--card-bg); /* Используем переменную */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,7 +178,7 @@ const handleLogin = async () => {
 }
 
 .login-card {
-  background: white;
+  background: var(--card-bg); /* Используем переменную */
   width: 100%;
   max-width: 420px;
   padding: 40px;
@@ -194,19 +195,19 @@ const handleLogin = async () => {
 .logo-circle {
   width: 60px;
   height: 60px;
-  background: #f8fafc;
+  background: var(--bg-color); /* Используем переменную */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color); /* Используем переменную */
 }
 
 .title {
   font-size: 22px;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-primary); /* Используем переменную */
   text-align: center;
   margin-bottom: 20px;
 }
@@ -219,11 +220,11 @@ const handleLogin = async () => {
 .lang-selector select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color); /* Используем переменную */
   border-radius: 8px;
-  background-color: white;
+  background-color: var(--card-bg); /* Используем переменную */
   font-size: 14px;
-  color: #374151;
+  color: var(--text-primary); /* Используем переменную */
   outline: none;
   cursor: pointer;
 }
@@ -243,20 +244,22 @@ label {
   display: block;
   font-size: 13px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--text-secondary); /* Используем переменную */
   margin-bottom: 6px;
 }
 
 .forgot-link {
   font-size: 12px;
-  color: #4f7cff;
+  color: var(--accent-color); /* Используем переменную */
   text-decoration: none;
 }
 
 input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color); /* Используем переменную */
+  background-color: var(--card-bg); /* Добавил фон инпута */
+  color: var(--text-primary); /* Добавил цвет текста в инпуте */
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -265,30 +268,31 @@ input {
 }
 
 input:focus {
-  border-color: #4f7cff;
+  border-color: var(--accent-color); /* Используем переменную */
 }
 
 /* КНОПКА ВОЙТИ */
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background-color: #4f7cff; 
-  color: white;
+  background-color: var(--accent-color); /* Используем переменную */
+  color: white; /* Текст на кнопке всегда оставляем белым */
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s; /* Изменил transition, так как мы используем переменные */
   margin-top: 10px;
 }
 
 .submit-btn:hover {
-  background-color: #3b66f5; 
+  opacity: 0.9;
 }
 
 .submit-btn:disabled {
-  background-color: #9ca3af;
+  background-color: var(--text-secondary); /* Используем переменную */
+  cursor: not-allowed;
 }
 
 /* НИЖНИЕ ССЫЛКИ */
@@ -296,11 +300,11 @@ input:focus {
   margin-top: 24px;
   text-align: center;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-secondary); /* Используем переменную */
 }
 
 .reg-link {
-  color: #4f7cff;
+  color: var(--accent-color); /* Используем переменную */
   text-decoration: none;
   font-weight: 600;
   margin-left: 5px;
@@ -316,12 +320,12 @@ input:focus {
 
   /* Заставляем левую сторону ПОКАЗАТЬСЯ */
   .left-side {
-    display: flex !important; /* Убирает display: none, если он где-то застрял */
+    display: flex !important;
     flex: none !important;
     width: 100% !important;
     padding: 20px !important;
-    background-color: #f8fafc !important;
-    min-height: 250px !important; /* Даем минимальную высоту, чтобы не схлопывалось */
+    background-color: var(--bg-color) !important; /* Используем переменную */
+    min-height: 250px !important;
   }
 
   /* Выравниваем логотип и картинку по центру */
@@ -342,7 +346,7 @@ input:focus {
   .right-side {
     flex: 1 !important;
     padding: 10px !important;
-    background-color: white !important;
+    background-color: var(--card-bg) !important; /* Используем переменную */
   }
 
   .login-card {
