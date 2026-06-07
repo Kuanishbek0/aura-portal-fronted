@@ -227,8 +227,14 @@ const text = {
 
 onMounted(async () => {
   try {
-    const res = await api.get('/dashboard/summary')
-    data.value = res.data
+    const summaryRes = await api.get('/dashboard/summary')
+    const scheduleRes = await api.get('/schedule/today')
+
+    data.value = {
+      ...summaryRes.data,
+      schedule: scheduleRes.data,
+      courses: summaryRes.data.courses || []
+    }
   } catch (e) {
     console.error('Ошибка загрузки главной страницы:', e)
   }
