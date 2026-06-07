@@ -48,8 +48,19 @@
 
               <div class="lesson-info">
                 <h4>{{ lesson.subject }}</h4>
-                <p>{{ lesson.type }} • {{ text[lang].room }} {{ lesson.room }}</p>
-                <div class="teacher">👨‍🏫 {{ lesson.teacher }}</div>
+
+                <p>
+                  {{ lesson.type }}
+                  <span v-if="lesson.room"> • {{ text[lang].room }} {{ lesson.room }}</span>
+                </p>
+
+                <div v-if="lesson.teacher" class="teacher">
+                  👨‍🏫 {{ lesson.teacher }}
+                </div>
+
+                <div v-else class="teacher muted-teacher">
+                  👨‍🏫 {{ text[lang].teacherNotSet }}
+                </div>
               </div>
             </div>
           </div>
@@ -82,6 +93,7 @@ const text = {
     freeDay: 'Выходной день',
     room: 'Ауд.',
     loading: 'Загрузка расписания...',
+    teacherNotSet: 'Преподаватель не указан',
     mon: 'Понедельник',
     tue: 'Вторник',
     wed: 'Среда',
@@ -94,6 +106,7 @@ const text = {
     freeDay: 'Демалыс күні',
     room: 'Ауд.',
     loading: 'Сабақ кестесі жүктелуде...',
+    teacherNotSet: 'Оқытушы көрсетілмеген',
     mon: 'Дүйсенбі',
     tue: 'Сейсенбі',
     wed: 'Сәрсенбі',
@@ -106,6 +119,7 @@ const text = {
     freeDay: 'Day Off',
     room: 'Room',
     loading: 'Loading schedule...',
+    teacherNotSet: 'Teacher not specified',
     mon: 'Monday',
     tue: 'Tuesday',
     wed: 'Wednesday',
@@ -199,10 +213,10 @@ const localizedSchedule = computed(() => {
     day.lessons.push({
       start: parsedTime.start,
       end: parsedTime.end,
-      subject: item.title,
+      subject: item.title || '',
       type: item.type || '',
-      room: item.room || 'көрсетілмеген',
-      teacher: item.teacher || 'Оқытушы көрсетілмеген',
+      room: item.room || '',
+      teacher: item.teacher || '',
       color: getColor(index)
     })
   })
@@ -213,6 +227,9 @@ const localizedSchedule = computed(() => {
 onMounted(async () => {
   try {
     const res = await api.get('/schedule/today')
+
+    console.log('SCHEDULE FROM API:', res.data)
+
     schedule.value = res.data
   } catch (error) {
     console.error('Ошибка загрузки расписания:', error)
@@ -404,6 +421,11 @@ onMounted(async () => {
   padding: 4px 8px;
   border-radius: 6px;
   font-weight: 600;
+}
+
+.muted-teacher {
+  color: #94a3b8;
+  background: #f1f5f9;
 }
 
 @media (min-width: 768px) {
