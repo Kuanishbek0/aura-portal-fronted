@@ -73,6 +73,7 @@
               <div>
                 <h4>{{ item.title }}</h4>
                 <p>{{ item.type }} • Ауд. {{ item.room }}</p>
+                <p v-if="item.teacher">👨‍🏫 {{ item.teacher }}</p>
               </div>
             </div>
           </div>

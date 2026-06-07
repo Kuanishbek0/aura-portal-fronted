@@ -202,7 +202,7 @@ const localizedSchedule = computed(() => {
       subject: item.title,
       type: item.type || '',
       room: item.room || 'көрсетілмеген',
-      teacher: 'Оқытушы көрсетілмеген',
+      teacher: item.teacher || 'Оқытушы көрсетілмеген',
       color: getColor(index)
     })
   })
